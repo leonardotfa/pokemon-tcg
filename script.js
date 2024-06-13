@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             const data = await response.json();
             displayCards(data.data);
+            resetInputs();
         } catch (error) {
             console.error('Erro ao buscar as cartas:', error);
         }
@@ -65,6 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return query.join('&');
     }
 
+    // Function to reset search input field and filters
+    function resetInputs() {
+        searchInput.value = '';
+        searchInput.placeholder = 'Search for Pokémon name...';
+
+        setSelect.selectedIndex = 0;
+        typeSelect.selectedIndex = 0;
+        subtypeSelect.selectedIndex = 0;
+        supertypeSelect.selectedIndex = 0;
+        raritySelect.selectedIndex = 0;
+    }
+
     // Function to populate filters (sets, types, subtypes, supertypes, rarities)
     async function populateFilters() {
         try {
@@ -75,6 +88,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             let data = await response.json();
+            setSelect.innerHTML = ''; // Clear existing options
+            const placeholderOption = document.createElement('option');
+            placeholderOption.value = '';
+            placeholderOption.textContent = 'Select Set';
+            placeholderOption.disabled = true;
+            placeholderOption.selected = true;
+            setSelect.appendChild(placeholderOption);
             data.data.forEach(set => {
                 const option = document.createElement('option');
                 option.value = set.id;
@@ -89,6 +109,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             data = await response.json();
+            typeSelect.innerHTML = ''; // Clear existing options
+            const typePlaceholderOption = document.createElement('option');
+            typePlaceholderOption.value = '';
+            typePlaceholderOption.textContent = 'Select Type';
+            typePlaceholderOption.disabled = true;
+            typePlaceholderOption.selected = true;
+            typeSelect.appendChild(typePlaceholderOption);
             data.data.forEach(type => {
                 const option = document.createElement('option');
                 option.value = type;
@@ -103,6 +130,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             data = await response.json();
+            subtypeSelect.innerHTML = ''; // Clear existing options
+            const subtypePlaceholderOption = document.createElement('option');
+            subtypePlaceholderOption.value = '';
+            subtypePlaceholderOption.textContent = 'Select Subtype';
+            subtypePlaceholderOption.disabled = true;
+            subtypePlaceholderOption.selected = true;
+            subtypeSelect.appendChild(subtypePlaceholderOption);
             data.data.forEach(subtype => {
                 const option = document.createElement('option');
                 option.value = subtype;
@@ -117,6 +151,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             data = await response.json();
+            supertypeSelect.innerHTML = ''; // Clear existing options
+            const supertypePlaceholderOption = document.createElement('option');
+            supertypePlaceholderOption.value = '';
+            supertypePlaceholderOption.textContent = 'Select Supertype';
+            supertypePlaceholderOption.disabled = true;
+            supertypePlaceholderOption.selected = true;
+            supertypeSelect.appendChild(supertypePlaceholderOption);
             data.data.forEach(supertype => {
                 const option = document.createElement('option');
                 option.value = supertype;
@@ -131,6 +172,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             data = await response.json();
+            raritySelect.innerHTML = ''; // Clear existing options
+            const rarityPlaceholderOption = document.createElement('option');
+            rarityPlaceholderOption.value = '';
+            rarityPlaceholderOption.textContent = 'Select Rarity';
+            rarityPlaceholderOption.disabled = true;
+            rarityPlaceholderOption.selected = true;
+            raritySelect.appendChild(rarityPlaceholderOption);
             data.data.forEach(rarity => {
                 const option = document.createElement('option');
                 option.value = rarity;
@@ -156,6 +204,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const queryString = buildQueryString();
             fetchCards(queryString);
         }
+    });
+
+    // press enter to search on filter dropdowns
+    const dropdowns = [setSelect, typeSelect, subtypeSelect, supertypeSelect, raritySelect];
+    dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Previne o comportamento padrão do Enter
+                const queryString = buildQueryString();
+                fetchCards(queryString);
+            }
+        });
     });
 
     populateFilters();

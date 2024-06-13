@@ -7,11 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const subtypeSelect = document.getElementById('subtype');
     const supertypeSelect = document.getElementById('supertype');
     const raritySelect = document.getElementById('rarity');
+    const loadingOverlay = document.getElementById('loading');
     
     const apiUrl = 'https://api.pokemontcg.io/v2';
 
+    // Show loading overlay
+    function showLoading() {
+        loadingOverlay.style.display = 'flex';
+    }
+
+    // Hide loading overlay
+    function hideLoading() {
+        loadingOverlay.style.display = 'none';
+    }
+
     // Request API function
     async function fetchCards(query) {
+        showLoading();
         try {
             const response = await fetch(`${apiUrl}/cards?${query}`, {
                 headers: {
@@ -23,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
             resetInputs();
         } catch (error) {
             console.error('Erro ao buscar as cartas:', error);
+        } finally {
+            hideLoading();
         }
     }
 
@@ -69,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Function to reset search input field and filters
     function resetInputs() {
         searchInput.value = '';
-        searchInput.placeholder = 'Search for Pokémon name...';
+        searchInput.placeholder = 'Search for cards...';
 
         setSelect.selectedIndex = 0;
         typeSelect.selectedIndex = 0;

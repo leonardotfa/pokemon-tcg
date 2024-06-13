@@ -43,3 +43,10 @@ Para executar este projeto localmente, siga as instruções abaixo:
 
 Este projeto consome a Pokémon TCG API para buscar informações detalhadas sobre cartas Pokémon, incluindo imagens, tipos, raridades e outros atributos.
 
+## Imagens:
+
+![image](https://github.com/leonardotfa/pokemon-tcg/assets/104572742/ebb077a5-9f85-466b-9285-8ac6b7eaa09b)
+
+![image](https://github.com/leonardotfa/pokemon-tcg/assets/104572742/8c95c103-debe-4b6b-bc94-cc071f73ee66)
+
+

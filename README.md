@@ -22,4 +22,24 @@ Para executar este projeto localmente, siga as instruções abaixo:
 
 1. Clone o repositório:
 
-```git clone https://github.com/seu-usuario/pokemon-tcg-project.git```
+  ```git clone https://github.com/seu-usuario/pokemon-tcg-project.git```
+
+2. Navegue até o diretório do projeto:
+
+  ```cd pokemon-tcg-project```
+
+3. Abra o arquivo index.html no seu navegador web.
+
+4. Interaja com a aplicação utilizando os filtros disponíveis para buscar e visualizar cartas Pokémon.
+
+## Estrutura do Projeto
+
+- index.html: Página principal que contém a estrutura HTML e os elementos interativos (inputs, selects, cards).
+- styles.css: Arquivo CSS para estilização básica da página.
+- script.js: Arquivo JavaScript que controla a interatividade da página, incluindo requisições à API, manipulação do DOM e atualização dinâmica dos filtros e resultados.
+- img/: Diretório contendo imagens utilizadas no projeto, como o logo do Pokémon TCG.
+
+## API Utilizada
+
+Este projeto consome a Pokémon TCG API para buscar informações detalhadas sobre cartas Pokémon, incluindo imagens, tipos, raridades e outros atributos.
+

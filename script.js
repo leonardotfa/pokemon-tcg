@@ -149,5 +149,14 @@ document.addEventListener("DOMContentLoaded", () => {
         fetchCards(queryString);
     });
 
+    // press enter to search
+    searchInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Previne o comportamento padrão do Enter
+            const queryString = buildQueryString();
+            fetchCards(queryString);
+        }
+    });
+
     populateFilters();
 });
